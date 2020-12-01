@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { createStore} from 'redux';
+import reducer from './reducers/history-reducer';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
+const store = createStore(reducer);
+
+// Square ************************************
 function Square (props) {
     return (
       <button 
@@ -12,7 +19,7 @@ function Square (props) {
     );
 
 }
-
+// Board ************************************
 class Board extends React.Component {
   renderSquare(i) {
     return (
@@ -22,7 +29,6 @@ class Board extends React.Component {
     />
     );
   }
-
   render() {
     return (
       <div>
@@ -46,6 +52,7 @@ class Board extends React.Component {
   }
 }
 
+// Game ************************************
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -57,7 +64,7 @@ class Game extends React.Component {
       xIsNext: true,
     };
   }
-
+ // 
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -123,13 +130,18 @@ class Game extends React.Component {
   }
 }
 
-// ========================================
+Game = connect()(Game);
 
+// ========================================
+ // 
 ReactDOM.render(
-  <Game />,
+  <Provider store={store}>
+    <Game />
+  </Provider>,
   document.getElementById('root')
 );
 
+// Helper Function ************************************
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
