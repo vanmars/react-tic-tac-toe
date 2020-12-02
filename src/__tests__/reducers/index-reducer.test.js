@@ -34,5 +34,13 @@ describe('rootReducer', () => {
       store.dispatch(action);
       expect(store.getState().history).toEqual(historyReducer(undefined, action));
   });
+  
+  test('Check TOGGLE action works for xIsNext and root reducer', () => {
+    const action = {
+      type: 'TOGGLE'
+    }
+    store.dispatch(action);
+    expect(store.getState().xIsNext).toEqual(xIsNextReducer(undefined, action));
+  });
 
 });
