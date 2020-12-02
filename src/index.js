@@ -55,89 +55,57 @@ class Board extends React.Component {
 
 // Game ************************************
 class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // history: [{
-      //   squares: Array(9).fill(null),
-      // }],
-      // stepNumber: 0,
-      // xIsNext: true,
-    };
-  }
- // 
   handleClick(i) {
     const { dispatch } = this.props;
     const history = this.props.history.slice(0, this.props.stepNumber + 1);
-
     const action = {
       type: 'DELETE_BOARD',
       stepNumber: this.props.stepNumber
     }
     dispatch(action)
-
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.props.xIsNext ? 'X' : 'O';
-
     // Update history
     const action2 = {
       type: 'ADD_BOARD',
       squares: squares
     }
     dispatch(action2);
-
     // Update xIsNext
     const action3 = {
       type: 'TOGGLE'
     }
     dispatch(action3);
-
     // Update stepNumber
     const action4 = {
       type: 'ADD_STEP'
     }
     dispatch(action4);
-
-    this.setState({
-      // history: history.concat([{
-      //   squares: squares,
-      // }]),
-      // stepNumber: history.length,
-      // xIsNext: !this.state.xIsNext,
-    });
   }
 
   jumpTo(step) {
     const { dispatch } = this.props
-    // if the step is even and if xIsNext is false, then we want to toggle
-    // if the step is not even and xIsNext is true, then we want to toggle
     if ((step % 2 === 0 && this.props.xIsNext === false) || (step % 2 !== 0 && this.props.xIsNext === true)) {
       const action = {
         type: 'TOGGLE'
       }
       dispatch(action)
     } 
-
     const action2 = {
       type: 'RESET_STEP',
       step: step
     }
     dispatch(action2)
-    this.setState({
-      // stepNumber: step,
-      // xIsNext: (step % 2) === 0,
-    });
   }
 
   render() {
     const history = this.props.history;
     const current = history[this.props.stepNumber];
     const winner = calculateWinner(current.squares);
-
     const moves = history.map((step, move) => {
       const desc = move ?
         'Go to move #' + move :
@@ -148,7 +116,6 @@ class Game extends React.Component {
         </li>
       );
     });
-
 
     let status;
     if (winner) {
