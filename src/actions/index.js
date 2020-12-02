@@ -1,22 +1,24 @@
+import * as c from './ActionTypes';
+
 export const addBoard = (squares) => ({
-  type: 'ADD_BOARD',
+  type: c.ADD_BOARD,
   squares: squares
 })
 
 export const deleteBoard = id => ({
-  type: 'DELETE_BOARD',
+  type: c.DELETE_BOARD,
   stepNumber: id
 })
 
 export const toggle = () => ({
-  type: 'TOGGLE'
+  type: c.TOGGLE
 })
 
 export const addStep = () => ({
-  type: 'ADD_STEP'
+  type: c.ADD_STEP
 })
 
 export const resetStep = (step) => ({
-  type: 'RESET_STEP',
+  type: c.RESET_STEP,
   step: step
 })

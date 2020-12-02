@@ -1,4 +1,5 @@
 import historyReducer from '../../reducers/history-reducer';
+import * as c from '../../actions/ActionTypes';
 
 describe ('historyReducer', () => {
 
@@ -23,7 +24,7 @@ describe ('historyReducer', () => {
   test('should successfully add a new board object to the history array', () => {
     const { squares } = boardData; 
     action = {
-      type: 'ADD_BOARD',
+      type: c.ADD_BOARD,
       squares: squares
     };
     expect(historyReducer([{squares: Array(9).fill(null)}], action)).toEqual([
@@ -33,7 +34,7 @@ describe ('historyReducer', () => {
   })
   test("Should successfully delete a board", () => {
     action = { 
-      type: 'DELETE_BOARD',
+      type: c.DELETE_BOARD,
       stepNumber: 0
     }
     expect(historyReducer(currentState, action)).toEqual([

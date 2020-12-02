@@ -3,6 +3,7 @@ import xIsNextReducer from '../../reducers/xIsNext-reducer';
 import { createStore }  from 'redux';
 import historyReducer from '../../reducers/history-reducer';
 import stepNumberReducer from '../../reducers/stepNumber-reducer'
+import * as c from '../../actions/ActionTypes';
 
 
 describe('rootReducer', () => {
@@ -30,7 +31,7 @@ describe('rootReducer', () => {
 
   test('Check that ADD_BOARD action works for historyReducer and the rootReducer', () => {
       const action = {
-        type: 'ADD_BOARD',
+        type: c.ADD_BOARD,
         squares: [
           'X', null, null,
           null, null, null,
@@ -43,7 +44,7 @@ describe('rootReducer', () => {
   
   test('Check TOGGLE action works for xIsNext and root reducer', () => {
     const action = {
-      type: 'TOGGLE'
+      type: c.TOGGLE
     }
     store.dispatch(action);
     expect(store.getState().xIsNext).toEqual(xIsNextReducer(undefined, action));
@@ -51,7 +52,7 @@ describe('rootReducer', () => {
 
   test('Check that ADD_STEP action works for stepNumber and rootReducer', () => {
     const action = {
-      type: 'ADD_STEP'
+      type: c.ADD_STEP
     }
     store.dispatch(action);
     expect(store.getState().stepNumber).toEqual(stepNumberReducer(undefined, action));
