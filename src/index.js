@@ -60,9 +60,6 @@ class Game extends React.Component {
     const { dispatch } = this.props;
     const history = this.props.history.slice(0, this.props.stepNumber + 1);
     const action = a.deleteBoard(this.props.stepNumber);
-    //   type: 'DELETE_BOARD',
-    //   stepNumber: this.props.stepNumber
-    // }
     dispatch(action);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -72,37 +69,22 @@ class Game extends React.Component {
     squares[i] = this.props.xIsNext ? 'X' : 'O';
     // Update history
     const action2 = a.addBoard(squares);
-    //   type: 'ADD_BOARD',
-    //   squares: squares
-    // }
     dispatch(action2);
     // Update xIsNext
     const action3 = a.toggle(); 
-    // {
-    //   type: 'TOGGLE'
-    // }
     dispatch(action3);
     // Update stepNumber
     const action4 = a.addStep();
-    // {
-    //   type: 'ADD_STEP'
-    // }
     dispatch(action4);
   }
 
   jumpTo(step) {
     const { dispatch } = this.props
     if ((step % 2 === 0 && this.props.xIsNext === false) || (step % 2 !== 0 && this.props.xIsNext === true)) {
-      const action = a.toggle()
-      //   type: 'TOGGLE'
-      // }
+      const action = a.toggle();
       dispatch(action);
     } 
     const action2 = a.resetStep(step); 
-    // {
-    //   type: 'RESET_STEP',
-    //   step: step
-    // }
     dispatch(action2);
   }
 
