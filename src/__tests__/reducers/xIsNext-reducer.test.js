@@ -8,4 +8,5 @@ describe('xIsNextReducer', () => {
   test('should toggle x is next state to true', () => {
     expect(xIsNextReducer(false, {type: 'TOGGLE'})).toEqual(true)
   });
-})
+
+});
