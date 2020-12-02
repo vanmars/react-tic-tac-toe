@@ -68,12 +68,12 @@ class Game extends React.Component {
   handleClick(i) {
     const { dispatch } = this.props;
     const history = this.props.history.slice(0, this.state.stepNumber + 1);
-    
-    // const action = {
-    //   type: 'DELETE_BOARDS'
-    //   stepNumber:
-    // }
-    // dispatch(action)
+
+    const action = {
+      type: 'DELETE_BOARD',
+      stepNumber: this.state.stepNumber
+    }
+    dispatch(action)
 
     const current = history[history.length - 1];
     const squares = current.squares.slice();
