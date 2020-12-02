@@ -44,7 +44,7 @@ _There are no known bugs at this time._
 
 * HTML
 * CSS
-* JavaScript/JSX/React
+* JavaScript/JSX/React/Redux
 * Webpack
 * NPM
 
