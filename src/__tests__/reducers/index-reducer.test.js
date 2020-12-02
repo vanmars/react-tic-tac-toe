@@ -22,4 +22,17 @@ describe('rootReducer', () => {
     expect(store.getState().xIsNext).toEqual(xIsNextReducer(undefined, {type: null}));
   });
 
+  test('Check that ADD_BOARD action works for historyReducer and the rootReducer', () => {
+      const action = {
+        type: 'ADD_BOARD',
+        squares: [
+          'X', null, null,
+          null, null, null,
+          null, null, null
+        ]
+      };
+      store.dispatch(action);
+      expect(store.getState().history).toEqual(historyReducer(undefined, action));
+  });
+
 });
