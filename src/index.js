@@ -66,19 +66,32 @@ class Game extends React.Component {
   }
  // 
   handleClick(i) {
-    // const { dispatch } = this.props;
-    // const
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const { dispatch } = this.props;
+    const history = this.props.history.slice(0, this.state.stepNumber + 1);
+    
+    // const action = {
+    //   type: 'DELETE_BOARDS'
+    //   stepNumber:
+    // }
+    // dispatch(action)
+
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+
+    const action2 = {
+      type: 'ADD_BOARD',
+      squares: squares
+    }
+    dispatch(action2);
+
     this.setState({
-      history: history.concat([{
-        squares: squares,
-      }]),
+      // history: history.concat([{
+      //   squares: squares,
+      // }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
     });
@@ -92,7 +105,7 @@ class Game extends React.Component {
   }
 
   render() {
-    const history = this.state.history;
+    const history = this.props.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
@@ -132,7 +145,12 @@ class Game extends React.Component {
   }
 }
 
-Game = connect()(Game);
+const mapStateToProps = state => {
+  return {
+    history: state
+  }
+}
+Game = connect(mapStateToProps)(Game);
 
 // ========================================
  // 
