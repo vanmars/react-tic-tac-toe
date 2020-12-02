@@ -3,7 +3,12 @@ export const addBoard = (board) => ({
   squares: board.squares
 })
 
-// ADD_BOARD
+export const deleteBoard = id => ({
+  type: 'DELETE_BOARD',
+  stepNumber: id
+})
+
+
 // DELETE_BOARD
 // TOGGLE
 // ADD_STEP
