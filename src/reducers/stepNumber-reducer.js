@@ -3,7 +3,7 @@ export default (state = 0, action) => {
     case 'ADD_STEP':
       return state + 1;
     case 'RESET_STEP':
-      return !state;
+      return action.step;
     default:
       return state;
   }
