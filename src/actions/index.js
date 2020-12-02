@@ -1,5 +1,6 @@
 export const addBoard = (board) => ({
-
+  type: 'ADD_BOARD',
+  squares: board.squares
 })
 
 // ADD_BOARD
