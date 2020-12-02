@@ -27,6 +27,11 @@ it('addStep should create ADD_STEP action', () => {
       type: 'ADD_STEP'
     });
   })
+it('resetStep should create RESET_STEP action', () => {
+    expect(a.resetStep(2)).toEqual({
+      type: 'RESET_STEP',
+      step: 2
+    })
+  })
 
-  // RESET_STEP
 })

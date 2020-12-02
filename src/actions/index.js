@@ -16,5 +16,9 @@ export const addStep = () => ({
   type: 'ADD_STEP'
 })
 
+export const resetStep = (step) => ({
+  type: 'RESET_STEP',
+  step: step
+})
 
 // RESET_STEP
