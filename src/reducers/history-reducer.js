@@ -9,7 +9,8 @@ export default (state = [{squares: Array(9).fill(null)}], action) => {
       return Array(...state, newObject)
 
     case 'DELETE_BOARD':
-      return state;
+      const newState = state.slice(0, action.stepNumber + 1)
+      return newState;
 
     default:
       return state;  
