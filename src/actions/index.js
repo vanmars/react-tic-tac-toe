@@ -8,8 +8,9 @@ export const deleteBoard = id => ({
   stepNumber: id
 })
 
-
-// DELETE_BOARD
+export const toggle = () => ({
+  type: 'TOGGLE'
+})
 // TOGGLE
 // ADD_STEP
 // RESET_STEP
