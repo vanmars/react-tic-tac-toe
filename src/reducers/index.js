@@ -6,7 +6,7 @@ import { combineReducers } from 'redux';
 const rootReducer = combineReducers({
   xIsNext: xIsNextReducer,
   history: historyReducer,
-  stepNumber: stepNumberReducer
+  // stepNumber: stepNumberReducer
 });
 
 export default rootReducer;
