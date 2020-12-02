@@ -49,4 +49,11 @@ describe('rootReducer', () => {
     expect(store.getState().xIsNext).toEqual(xIsNextReducer(undefined, action));
   });
 
+  test('Check that ADD_STEP action works for stepNumber and rootReducer', () => {
+    const action = {
+      type: 'ADD_STEP'
+    }
+    store.dispatch(action);
+    expect(store.getState().stepNumber).toEqual(stepNumberReducer(undefined, action));
+  });
 });
