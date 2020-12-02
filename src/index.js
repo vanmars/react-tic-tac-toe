@@ -61,18 +61,18 @@ class Game extends React.Component {
       // history: [{
       //   squares: Array(9).fill(null),
       // }],
-      stepNumber: 0,
+      // stepNumber: 0,
       // xIsNext: true,
     };
   }
  // 
   handleClick(i) {
     const { dispatch } = this.props;
-    const history = this.props.history.slice(0, this.state.stepNumber + 1);
+    const history = this.props.history.slice(0, this.props.stepNumber + 1);
 
     const action = {
       type: 'DELETE_BOARD',
-      stepNumber: this.state.stepNumber
+      stepNumber: this.props.stepNumber
     }
     dispatch(action)
 
@@ -83,22 +83,30 @@ class Game extends React.Component {
     }
     squares[i] = this.props.xIsNext ? 'X' : 'O';
 
+    // Update history
     const action2 = {
       type: 'ADD_BOARD',
       squares: squares
     }
     dispatch(action2);
 
+    // Update xIsNext
     const action3 = {
       type: 'TOGGLE'
     }
     dispatch(action3);
 
+    // Update stepNumber
+    const action4 = {
+      type: 'ADD_STEP'
+    }
+    dispatch(action4);
+
     this.setState({
       // history: history.concat([{
       //   squares: squares,
       // }]),
-      stepNumber: history.length,
+      // stepNumber: history.length,
       // xIsNext: !this.state.xIsNext,
     });
   }
@@ -113,15 +121,21 @@ class Game extends React.Component {
       }
       dispatch(action)
     } 
+
+    const action2 = {
+      type: 'RESET_STEP',
+      step: step
+    }
+    dispatch(action2)
     this.setState({
-      stepNumber: step,
+      // stepNumber: step,
       // xIsNext: (step % 2) === 0,
     });
   }
 
   render() {
     const history = this.props.history;
-    const current = history[this.state.stepNumber];
+    const current = history[this.props.stepNumber];
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
@@ -163,13 +177,15 @@ class Game extends React.Component {
 const mapStateToProps = state => {
   return {
     xIsNext: state.xIsNext,
-    history: state.history
+    history: state.history,
+    stepNumber: state.stepNumber
   }
 }
 
 Game.propTypes = {
   xIsNext: PropTypes.bool,
-  history: PropTypes.array
+  history: PropTypes.array,
+  stepNumber: PropTypes.number
 }
 
 Game = connect(mapStateToProps)(Game);
