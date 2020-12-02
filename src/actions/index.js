@@ -1,6 +1,6 @@
-export const addBoard = (board) => ({
+export const addBoard = (squares) => ({
   type: 'ADD_BOARD',
-  squares: board.squares
+  squares: squares
 })
 
 export const deleteBoard = id => ({
@@ -20,5 +20,3 @@ export const resetStep = (step) => ({
   type: 'RESET_STEP',
   step: step
 })
-
-// RESET_STEP

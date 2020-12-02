@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
 import rootReducer from './reducers/index';
 import PropTypes from 'prop-types';
+import * as a from './actions';
 
 const store = createStore(rootReducer);
 
@@ -28,7 +29,7 @@ class Board extends React.Component {
       value={this.props.squares[i]}
       onClick={() => this.props.onClick(i)}
     />
-    );
+    )
   }
   render() {
     return (
@@ -58,11 +59,11 @@ class Game extends React.Component {
   handleClick(i) {
     const { dispatch } = this.props;
     const history = this.props.history.slice(0, this.props.stepNumber + 1);
-    const action = {
-      type: 'DELETE_BOARD',
-      stepNumber: this.props.stepNumber
-    }
-    dispatch(action)
+    const action = a.deleteBoard(this.props.stepNumber);
+    //   type: 'DELETE_BOARD',
+    //   stepNumber: this.props.stepNumber
+    // }
+    dispatch(action);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
@@ -70,36 +71,39 @@ class Game extends React.Component {
     }
     squares[i] = this.props.xIsNext ? 'X' : 'O';
     // Update history
-    const action2 = {
-      type: 'ADD_BOARD',
-      squares: squares
-    }
+    const action2 = a.addBoard(squares);
+    //   type: 'ADD_BOARD',
+    //   squares: squares
+    // }
     dispatch(action2);
     // Update xIsNext
-    const action3 = {
-      type: 'TOGGLE'
-    }
+    const action3 = a.toggle(); 
+    // {
+    //   type: 'TOGGLE'
+    // }
     dispatch(action3);
     // Update stepNumber
-    const action4 = {
-      type: 'ADD_STEP'
-    }
+    const action4 = a.addStep();
+    // {
+    //   type: 'ADD_STEP'
+    // }
     dispatch(action4);
   }
 
   jumpTo(step) {
     const { dispatch } = this.props
     if ((step % 2 === 0 && this.props.xIsNext === false) || (step % 2 !== 0 && this.props.xIsNext === true)) {
-      const action = {
-        type: 'TOGGLE'
-      }
-      dispatch(action)
+      const action = a.toggle()
+      //   type: 'TOGGLE'
+      // }
+      dispatch(action);
     } 
-    const action2 = {
-      type: 'RESET_STEP',
-      step: step
-    }
-    dispatch(action2)
+    const action2 = a.resetStep(step); 
+    // {
+    //   type: 'RESET_STEP',
+    //   step: step
+    // }
+    dispatch(action2);
   }
 
   render() {

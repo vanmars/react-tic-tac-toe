@@ -3,7 +3,7 @@ import * as a from '../../actions';
 describe('game actions', () => {
 
 it('addBoard should create ADD_BOARD action', () => {
-    expect(a.addBoard({ squares: [ 'X', null, null, null, null, null, null, null, null]})).toEqual({
+    expect(a.addBoard([ 'X', null, null, null, null, null, null, null, null])).toEqual({
       type: 'ADD_BOARD',
       squares: [ 'X', null, null, null, null, null, null, null, null]
     });
