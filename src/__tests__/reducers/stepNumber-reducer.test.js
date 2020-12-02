@@ -10,10 +10,10 @@ test('should successfully add a step to the stepNumber state', () => {
   });
 
 test('should successfully reset step to the stepNumber state', () => {
-  const action = {
-    type: 'RESET_STEP',
-    step: 0
-  }
-  expect(stepNumberReducer(9, action)).toEqual(0)
+    const action = {
+      type: 'RESET_STEP',
+      step: 0
+    };
+    expect(stepNumberReducer(9, action)).toEqual(0);
   });
 })
