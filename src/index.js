@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { createStore} from 'redux';
-import reducer from './reducers/history-reducer';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
+import rootReducer from './reducers/index';
+import PropTypes from 'prop-types';
 
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 // Square ************************************
 function Square (props) {
@@ -61,7 +62,7 @@ class Game extends React.Component {
       //   squares: Array(9).fill(null),
       // }],
       stepNumber: 0,
-      xIsNext: true,
+      // xIsNext: true,
     };
   }
  // 
@@ -80,7 +81,7 @@ class Game extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    squares[i] = this.props.xIsNext ? 'X' : 'O';
 
     const action2 = {
       type: 'ADD_BOARD',
@@ -88,19 +89,33 @@ class Game extends React.Component {
     }
     dispatch(action2);
 
+    const action3 = {
+      type: 'TOGGLE'
+    }
+    dispatch(action3);
+
     this.setState({
       // history: history.concat([{
       //   squares: squares,
       // }]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
+      // xIsNext: !this.state.xIsNext,
     });
   }
 
   jumpTo(step) {
+    const { dispatch } = this.props
+    // if the step is even and if xIsNext is false, then we want to toggle
+    // if the step is not even and xIsNext is true, then we want to toggle
+    if ((step % 2 === 0 && this.props.xIsNext === false) || (step % 2 !== 0 && this.props.xIsNext === true)) {
+      const action = {
+        type: 'TOGGLE'
+      }
+      dispatch(action)
+    } 
     this.setState({
       stepNumber: step,
-      xIsNext: (step % 2) === 0,
+      // xIsNext: (step % 2) === 0,
     });
   }
 
@@ -125,7 +140,7 @@ class Game extends React.Component {
     if (winner) {
       status = 'Winner: ' + winner;
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = 'Next player: ' + (this.props.xIsNext ? 'X' : 'O');
     }
 
     return (
@@ -147,9 +162,16 @@ class Game extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    history: state
+    xIsNext: state.xIsNext,
+    history: state.history
   }
 }
+
+Game.propTypes = {
+  xIsNext: PropTypes.bool,
+  history: PropTypes.array
+}
+
 Game = connect(mapStateToProps)(Game);
 
 // ========================================
