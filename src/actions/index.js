@@ -11,6 +11,10 @@ export const deleteBoard = id => ({
 export const toggle = () => ({
   type: 'TOGGLE'
 })
-// TOGGLE
-// ADD_STEP
+
+export const addStep = () => ({
+  type: 'ADD_STEP'
+})
+
+
 // RESET_STEP

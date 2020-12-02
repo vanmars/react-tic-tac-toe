@@ -22,7 +22,11 @@ it('toggle should create TOGGLE action', () => {
     });
   })
 
-  // TOGGLE
-  // ADD_STEP
+it('addStep should create ADD_STEP action', () => {
+    expect(a.addStep()).toEqual({
+      type: 'ADD_STEP'
+    });
+  })
+
   // RESET_STEP
 })
